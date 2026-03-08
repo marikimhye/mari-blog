@@ -24,7 +24,7 @@ module.exports = {
 						h2: {
 							fontWeight: '700',
 							letterSpacing: '-0.01em',
-							fontSize: '1.375rem',
+							fontSize: '1.625rem',
 							marginTop: '2.5rem',
 							marginBottom: '0.75rem',
 						},

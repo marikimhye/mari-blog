@@ -10,23 +10,33 @@ module.exports = {
 				DEFAULT: {
 					css: {
 						fontFamily: '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
-						fontSize: '1.05rem',
-						lineHeight: '1.85',
+						fontSize: '1.0625rem',
+						lineHeight: '1.75',
+						letterSpacing: '0',
 						color: '#333',
+						wordBreak: 'keep-all',
 						h1: {
 							fontWeight: '700',
 							letterSpacing: '-0.02em',
+							fontSize: '1.75rem',
+							marginBottom: '0.5rem',
 						},
 						h2: {
-							fontWeight: '600',
+							fontWeight: '700',
 							letterSpacing: '-0.01em',
+							fontSize: '1.375rem',
+							marginTop: '2.5rem',
+							marginBottom: '0.75rem',
 						},
 						h3: {
 							fontWeight: '600',
+							fontSize: '1.2rem',
+							marginTop: '2rem',
+							marginBottom: '0.5rem',
 						},
 						p: {
-							marginTop: '1.2em',
-							marginBottom: '1.2em',
+							marginTop: '0',
+							marginBottom: '0.75rem',
 						},
 						a: {
 							fontWeight: '500',
@@ -34,6 +44,10 @@ module.exports = {
 						blockquote: {
 							fontStyle: 'normal',
 							fontWeight: '400',
+						},
+						li: {
+							marginTop: '0.25rem',
+							marginBottom: '0.25rem',
 						},
 					},
 				},

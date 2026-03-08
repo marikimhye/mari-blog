@@ -2,42 +2,89 @@
 import { type BlogSchema } from "../content/config";
 import BaseLayout from "./BaseLayout.astro";
 import dayjs from "dayjs";
-import localizedFormat from "dayjs/plugin/localizedFormat";
+import "dayjs/locale/ko";
+import { Image } from "astro:assets";
 
 export interface Props extends BlogSchema {}
 
 const { title, description, pubDate, updatedDate, heroImage, badge, tags = [] } = Astro.props;
-dayjs.extend(localizedFormat);
-const displayDate = dayjs(pubDate).format("ll")
-import { Image } from "astro:assets";
+dayjs.locale("ko");
+const displayDate = dayjs(pubDate).format("YYYY. MM. DD");
 ---
 
 <BaseLayout title={title} description={description} image={heroImage}, ogType="article">
-  <main class="md:flex md:justify-center">
-    <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
-      {heroImage && <Image width={750} height={422} format="webp" src={heroImage} alt={title} class="w-full mb-6" />}
-      <h1 class="title my-2 text-4xl font-bold">{title}</h1>
-      {pubDate && <time>{displayDate}</time>}
-      <br />
-      {badge && <div class="badge badge-secondary my-1">{badge}</div>}
-      {
-        tags &&
+  <main class="flex justify-center px-6">
+    <article class="w-full max-w-[47.5rem]">
+      <!-- 메타 정보 -->
+      <div class="mb-4 flex flex-wrap items-center gap-2 text-sm text-gray-500">
+        <time>{displayDate}</time>
+        {tags.length > 0 && <span class="text-gray-300">·</span>}
+        {
           tags.map((tag) => (
-            <a href={`/blog/tag/${tag}`} class="badge badge-outline ml-2 no-underline">
+            <a href={`/blog/tag/${tag}`} class="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600 no-underline hover:bg-gray-200 transition-colors">
               {tag}
             </a>
           ))
-      }
+        }
+        {badge && <span class="rounded-full bg-orange-100 px-3 py-1 text-xs font-medium text-orange-600">{badge}</span>}
+      </div>
+
+      <!-- 제목 -->
+      <h1 class="text-3xl md:text-[2.25rem] font-bold leading-tight tracking-tight mb-6 break-keep">{title}</h1>
+
+      {/* 설명 */}
+      {description && <p class="text-gray-500 text-lg mb-8 break-keep">{description}</p>}
+
+      <!-- 히어로 이미지 -->
+      {heroImage && <Image width={750} height={422} format="webp" src={heroImage} alt={title} class="w-full rounded-2xl mb-10" />}
+
+      <!-- 구분선 -->
+      <div class="border-t border-gray-200 mb-10"></div>
+
+      <!-- 본문 -->
+      <div class="prose prose-lg max-w-none prose-img:rounded-2xl prose-img:mx-auto post-body">
+        <slot />
+      </div>
+
+      <!-- 하단 메타 -->
       {
         updatedDate && (
-          <div>
-            {" "}
-            Last updated on <time>{updatedDate}</time>{" "}
+          <div class="mt-10 pt-6 border-t border-gray-200 text-sm text-gray-400">
+            마지막 수정: {dayjs(updatedDate).format("YYYY. MM. DD")}
           </div>
         )
       }
-      <div class="divider my-2"></div>
-      <slot />
     </article>
   </main>
 </BaseLayout>
+
+<style>
+  .post-body :global(p) {
+    word-break: keep-all;
+    margin-bottom: 0.75rem;
+    line-height: 1.75;
+    letter-spacing: 0;
+  }
+
+  .post-body :global(h2) {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+  }
+
+  .post-body :global(h3) {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .post-body :global(li) {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .post-body :global(blockquote) {
+    font-style: normal;
+    border-left-color: #e5e7eb;
+  }
+</style>

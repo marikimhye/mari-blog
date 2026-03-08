@@ -10,7 +10,7 @@ module.exports = {
 				DEFAULT: {
 					css: {
 						fontFamily: '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
-						fontSize: '1.0625rem',
+						fontSize: '1rem',
 						lineHeight: '1.75',
 						letterSpacing: '0',
 						color: '#333',

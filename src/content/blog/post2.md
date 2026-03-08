@@ -3,6 +3,7 @@ title: "PM의 Claude Code 워크플로우: 6개 커스텀 스킬 소개"
 description: "PRD 자동 작성, 세션 마무리, Confluence 연동 등 PM 업무에 최적화된 Claude Code 커스텀 스킬을 소개합니다."
 pubDate: "Feb 10 2026"
 heroImage: "/post_img.webp"
+category: "AI 워크플로우"
 tags: ["claude-code", "워크플로우", "PM"]
 ---
 

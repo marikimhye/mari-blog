@@ -1,43 +1,43 @@
 ---
-const { title, img, desc, url, badge, tags, target = "_blank" } = Astro.props;
+const { title, img, desc, url, badge, tags, target = "_self", date, category } = Astro.props;
 import { Image } from "astro:assets";
-const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
+import dayjs from "dayjs";
+
+const displayDate = date ? dayjs(date).format("YYYY-MM-DD") : null;
 ---
 
-<div
-  class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%]"
->
-  <a href={url} target={target}>
-    <div class="hero-content flex-col md:flex-row">
-      {
-        img && (
-          <Image
-            src={img}
-            width={750}
-            height={422}
-            format="webp"
-            alt={title}
-            class="max-w-full md:max-w-[13rem] rounded-lg"
-          />
-        )
-      }
-      <div class="grow w-full">
-        <h1 class="text-xl font-bold">
-          {title}
-          {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
-        </h1>
-        <p class="py-1 text-1xl">{desc}</p>
-        <div class="card-actions justify-end">
-          {
-            tags &&
-              tags.map((tag) => (
-                <a href={`${tag_url}/${tag}`} class="badge badge-outline">
-                  {tag}
-                </a>
-              ))
-          }
-        </div>
+<a href={url} target={target} class="block group no-underline">
+  <article>
+    {img && (
+      <Image
+        src={img}
+        width={750}
+        height={422}
+        format="webp"
+        alt={title}
+        class="w-full aspect-video object-cover rounded-2xl mb-5 group-hover:opacity-90 transition-opacity"
+      />
+    )}
+    <h3 class="text-[22px] font-semibold leading-snug tracking-tight break-keep mb-1.5 text-gray-900">
+      {title}
+      {badge && <span class="ml-2 inline-block rounded-full bg-orange-100 px-2.5 py-0.5 text-xs font-medium text-orange-600 align-middle">{badge}</span>}
+    </h3>
+    {(displayDate || category) && (
+      <div class="flex items-center gap-1.5 text-[13px] text-gray-400 mb-1.5">
+        {category && <span>{category}</span>}
+        {category && displayDate && <span>·</span>}
+        {displayDate && <time>{displayDate}</time>}
       </div>
-    </div>
-  </a>
-</div>
+    )}
+    {desc && <p class="text-[14px] text-gray-500 leading-relaxed break-keep mb-2 line-clamp-2">{desc}</p>}
+    {tags && tags.length > 0 && (
+      <div class="flex flex-wrap gap-1.5 mt-2.5">
+        {tags.map((tag) => (
+          <span class="rounded-full bg-gray-100 px-2.5 py-0.5 text-[11px] text-gray-500">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </article>
+</a>

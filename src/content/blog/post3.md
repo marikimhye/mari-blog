@@ -3,6 +3,7 @@ title: "기획자가 AI에게 일을 시키는 법"
 description: "같은 AI를 쓰는데 누군가는 바로 쓸 수 있는 결과를 뽑고, 누군가는 '역시 AI는 아직'이라고 한다. 차이는 프롬프트에 있다. PM의 실전 DO/DON'T를 공유합니다."
 pubDate: "Mar 03 2026"
 heroImage: "/post_img.webp"
+category: "AI 워크플로우"
 tags: ["AI활용", "프롬프트", "PM"]
 badge: "NEW"
 ---

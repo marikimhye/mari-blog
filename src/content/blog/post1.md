@@ -3,6 +3,7 @@ title: "비개발자가 Claude Code로 업무 자동화를 만든 이야기"
 description: "PM이 개발 경험 없이 Claude Code를 활용해 실무 자동화 도구를 만든 과정과 배운 점을 공유합니다."
 pubDate: "Feb 12 2026"
 heroImage: "/post_img.webp"
+category: "AI 워크플로우"
 tags: ["claude-code", "자동화", "비개발자"]
 badge: "NEW"
 ---

@@ -1,33 +1,62 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HorizontalCard from "../components/HorizontalCard.astro";
+
+const projects = [
+  {
+    month: "Mar 2026",
+    items: [
+      { title: "개인 블로그 (Marie Note)", desc: "Astro + TailwindCSS 기반 개인 블로그. Claude Code로 디자인부터 배포까지.", url: "https://marie-blog.pages.dev" },
+    ],
+  },
+  {
+    month: "Feb 2026",
+    items: [
+      { title: "Claude Code 생산성 사례집", desc: "PM 관점에서 Claude Code로 달성한 생산성 개선 사례를 정리한 인터랙티브 페이지.", url: "#" },
+      { title: "Claude Code 비개발자 가이드", desc: "개발 경험 없는 PM이 Claude Code를 셋팅하고 실무에 적용하기까지의 가이드.", url: "#" },
+    ],
+  },
+  {
+    month: "Jan 2026",
+    items: [
+      { title: "KISA 스팸민원 자동화", desc: "엑셀 파일에서 스팸 신고 내역을 읽어 DOCX/PDF 조치내역서를 자동 생성하는 도구.", url: "#", badge: "AI Built" },
+    ],
+  },
+];
 ---
 
 <BaseLayout title="Projects" sideBarActiveItemID="projects">
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">AI로 만든 도구들</div>
-    <p class="mb-6 opacity-70">Claude Code를 활용해 직접 만든 프로젝트들입니다.</p>
-  </div>
+  <div class="max-w-[620px]">
+    <div class="mb-10">
+      <h1 class="text-[28px] font-bold tracking-tight mb-3">Projects</h1>
+      <p class="text-[15px] text-gray-500 leading-relaxed break-keep">
+        Claude Code를 활용해 직접 만든 도구들입니다.
+      </p>
+    </div>
 
-  <HorizontalCard
-    title="KISA 스팸민원 자동화"
-    img="/post_img.webp"
-    desc="엑셀 파일에서 스팸 신고 내역을 읽어 DOCX/PDF 조치내역서를 자동 생성하는 도구."
-    url="#"
-    badge="AI Built"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Claude Code 비개발자 가이드"
-    img="/post_img.webp"
-    desc="개발 경험 없는 PM이 Claude Code를 셋팅하고 실무에 적용하기까지의 가이드."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Claude Code 생산성 사례집"
-    img="/post_img.webp"
-    desc="PM 관점에서 Claude Code로 달성한 생산성 개선 사례를 정리한 인터랙티브 페이지."
-    url="#"
-  />
+    <div class="space-y-10">
+      {projects.map((group) => (
+        <div>
+          <h2 class="text-[13px] font-medium text-gray-400 uppercase tracking-wider mb-4">{group.month}</h2>
+          <div class="space-y-4">
+            {group.items.map((item) => (
+              <a href={item.url} class="block group">
+                <div class="flex items-start justify-between gap-4 py-3 border-b border-gray-100 group-hover:border-gray-300 transition-colors">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="text-[16px] font-semibold text-gray-900 group-hover:text-gray-600 transition-colors">{item.title}</span>
+                      {item.badge && <span class="rounded-full bg-orange-100 px-2 py-0.5 text-[11px] font-medium text-orange-600">{item.badge}</span>}
+                    </div>
+                    <p class="text-[13px] text-gray-400 leading-relaxed break-keep">{item.desc}</p>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-gray-300 stroke-[1.5] shrink-0 mt-1.5 group-hover:stroke-gray-500 transition-colors">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
 </BaseLayout>

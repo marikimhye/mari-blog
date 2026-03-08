@@ -5,6 +5,7 @@ pubDate: "Mar 08 2026"
 category: "AI 워크플로우"
 tags: ["프롬프팅", "AI활용", "PM"]
 badge: "NEW"
+heroImage: "/post4_hero.jpg"
 ---
 
 안녕하세요. 커뮤니티 서비스 Product Owner로 일하고 있는 marie입니다.

@@ -1,0 +1,107 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
+
+import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
+
+const {
+  image,
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  sideBarActiveItemID,
+  ogType,
+} = Astro.props;
+
+const navItems = [
+  { id: "home", label: "Home", href: "/" },
+  { id: "blog", label: "Blog", href: "/blog/" },
+  { id: "projects", label: "Projects", href: "/projects" },
+  { id: "about", label: "About", href: "/about" },
+];
+---
+
+<!doctype html>
+<html lang="ko" data-theme="cmyk">
+  <head>
+    <BaseHead title={title} description={description} image={image} ogType={ogType} />
+    {TRANSITION_API && <ViewTransitions />}
+  </head>
+  <body class="bg-base-100 min-h-screen flex flex-col">
+    <!-- Top Navigation -->
+    <header class="navbar bg-base-100 border-b border-base-200 sticky top-0 z-50 backdrop-blur bg-opacity-90 px-6 lg:px-10">
+      <div class="navbar-start">
+        <a href="/" class="site-logo">marie</a>
+      </div>
+      <div class="navbar-end hidden md:flex">
+        <ul class="menu menu-horizontal gap-1">
+          {navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "nav-item",
+                  sideBarActiveItemID === item.id && "active"
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <!-- Mobile menu -->
+        <div class="dropdown dropdown-end md:hidden">
+          <label tabindex="0" class="btn btn-ghost btn-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </label>
+          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box shadow-lg w-52 p-2 mt-2 border border-base-200">
+            {navItems.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[sideBarActiveItemID === item.id && "active"]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex justify-center">
+      <main class="p-6 pt-10 w-full max-w-[820px]">
+        <slot />
+      </main>
+    </div>
+
+    <Footer />
+
+    <style is:global>
+      /* Logo: Cormorant Garamond lowercase italic */
+      .site-logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 300;
+        font-style: italic;
+        font-size: 1.6rem;
+        letter-spacing: 0.02em;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* Nav items: Cormorant Garamond to match logo tone */
+      .nav-item {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 400;
+        font-size: 0.95rem;
+        letter-spacing: 0.04em;
+        text-transform: lowercase;
+      }
+    </style>
+
+  </body>
+</html>

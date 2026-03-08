@@ -1,0 +1,41 @@
+---
+import SideBarFooter from "./SideBarFooter.astro";
+import { Image } from "astro:assets";
+import SideBarMenu from "./SideBarMenu.astro";
+const { sideBarActiveItemID } = Astro.props;
+---
+
+<div class="drawer-side z-40">
+  <label for="my-drawer" class="drawer-overlay"></label>
+  <aside class="px-2 pt-2 h-auto min-h-full w-[19rem] bg-base-200 text-base-content flex flex-col">
+    <div class="w-fit mx-auto mt-5 mb-6">
+      <a href="/">
+        <div class="avatar transition ease-in-out hover:scale-[102%] block m-auto">
+          <div class="w-[8.5rem]">
+            <Image class="mask mask-circle" format="webp" width={300} height={300} src="/profile.webp" alt="Profile image" />
+          </div>
+        </div>
+      </a>
+    </div>
+    <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+
+    <!-- Theme Switcher -->
+    <div class="px-4 py-3">
+      <div class="text-xs font-semibold opacity-50 mb-2 uppercase">Theme</div>
+      <select id="theme-select" class="select select-bordered select-sm w-full">
+        <option value="winter">Winter (클린 블루)</option>
+        <option value="nord">Nord (소프트)</option>
+        <option value="corporate">Corporate (비즈니스)</option>
+        <option value="lemonade">Lemonade (프레시 그린)</option>
+        <option value="cmyk">CMYK (비비드)</option>
+        <option value="wireframe">Wireframe (울트라 미니멀)</option>
+        <option value="lofi">Lofi (현재)</option>
+        <option value="night">Night (다크)</option>
+        <option value="business">Business (다크 프로)</option>
+        <option value="coffee">Coffee (다크 워밍)</option>
+      </select>
+    </div>
+
+    <SideBarFooter />
+  </aside>
+</div>
